@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>Araç Fiyat Tahmini</title>
+    <style>
+        body {
+            background: #f5f5f5;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            width: 420px;
+            margin: auto;
+            margin-top: 30px;
+            padding: 25px;
+            background: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+        }
+        h2 {
+            text-align: center;
+        }
+        label {
+            font-weight: bold;
+            margin-top: 10px;
+            display: block;
+        }
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 15px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007BFF;
+            color: white;
+            font-size: 16px;
+        }
+        .result {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 18px;
+            color: green;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Araç Fiyat Tahmin Uygulaması</h2>
+
+        <form action="/predict" method="POST">
+
+            <label>Model Yılı (Year)</label>
+            <input type="number" name="year" required>
+
+            <label>Kilometre (Km Driven)</label>
+            <input type="number" name="km_driven" required>
+
+            <label>Yakıt Türü (Fuel Type)</label>
+            <select name="fuel" required>
+                <option>Petrol</option>
+                <option>Diesel</option>
+                <option>CNG</option>
+            </select>
+
+            <label>Satıcı Türü (Seller Type)</label>
+            <select name="seller_type" required>
+                <option>Dealer</option>
+                <option>Individual</option>
+            </select>
+
+            <label>Vites Türü (Transmission)</label>
+            <select name="transmission" required>
+                <option>Manual</option>
+                <option>Automatic</option>
+            </select>
+
+            <label>Kaçıncı Sahip (Owner Count)</label>
+            <input type="number" name="owner" required>
+
+            <button type="submit">Hesapla</button>
+        </form>
+
+        {% if prediction_text %}
+        <div class="result">
+            {{ prediction_text }}
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
